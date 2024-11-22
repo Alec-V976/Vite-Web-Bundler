@@ -1,0 +1,13 @@
+/*
+ * Class: SWE2511 - Calculator
+ *
+ * Calculator custom styles
+ */
+
+.op_row {
+    height: 8em;
+}
+
+.op_equals {
+    padding-top: 1.5em;
+}
