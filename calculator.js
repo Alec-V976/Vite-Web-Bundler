@@ -1,8 +1,16 @@
 /*
  * Class: SWE2511 - Calculator
- *
+ * Name: Alec VerStrate
+ * Section: 111
  * Calculator validation and user interface functions
  */
+
+import {isNumber} from "./utilities.js"
+import {doArithmetic, findDistanceBetweenPoints} from "./math_functions.js"
+import {doQuadratic} from "./math_functions.js"
+
+
+
 
 /**
  * validateNumberInput - checks if an input value is a number
@@ -59,6 +67,9 @@ const getFloatValue = (inputId) => {
     return parseFloat(document.getElementById(inputId).value);
 }
 
+
+
+
 /**
  * handleArithmetic - handle input validation and display for arithmetic operations
  */
@@ -68,6 +79,8 @@ const handleArithmetic = () => {
 
     const aValid = validateNumberInput("input_a", "numA_error");
     const bValid = validateNumberInput("input_b", "numB_error");
+    const operation = selectElement.value;
+
 
     // If inputs are not valid set the result to empty
     if(!aValid || !bValid) {
@@ -78,16 +91,96 @@ const handleArithmetic = () => {
     // Retrieve the input values and compute the solution
     const aValue = getFloatValue("input_a");
     const bValue = getFloatValue("input_b");
-    const operation = selectElement.value;
 
-    try {
-        resultElement.innerText = doArithmetic(aValue, bValue, operation);
+    let resultA = true;
+    let resultB = true;
+    if(operation === "GCD") {
+        resultA = performTests("input_a","numA_error", [validateNonZeroNumberInput, numIsInteger]);
+        resultB = performTests("input_b","numB_error", [validateNonZeroNumberInput, numIsInteger]);
+    } else if(operation === "divide") {
+        resultB = validateNonZeroNumberInput("input_b", "numB_error");
     }
-    // Catch errors if any exist
-    catch (error) {
-        resultElement.innerText = error.message;
+
+    if(resultA && resultB) {
+        try {
+            resultElement.innerText = doArithmetic(aValue, bValue, operation);
+        }
+            // Catch errors if any exist
+        catch (error) {
+            resultElement.innerText = error.message;
+        }
     }
 }
+
+
+// This validation test handles if the input is an integer, displaying an
+// error on screen if there is, or clearing it if its valid.
+const numIsInteger = (inputid, errorid) => {
+
+    const inputElement = document.getElementById(inputid);
+    const errorElement = document.getElementById(errorid);
+    const value = inputElement.value;
+    let result = Number.isInteger(Number(value));
+
+    if(!result) {
+        errorElement.innerText = "Enter an integer";
+        inputElement.classList.add('is-invalid');
+        return false;
+    } else {
+        inputElement.classList.remove('is-invalid');
+        errorElement.innerText = "";
+        return true;
+    }
+
+}
+
+
+// This function loops through a set of validation tests, checking if any of them fail.
+// whether or not every test passed or failed is returned as a boolean.
+const performTests = (inputid, errorid, tests) => {
+    let success = true;
+    for(let i = 0; i < tests.length && success; i++) {
+        let result = tests[i](inputid,errorid);
+        if(!result) {
+            success = false;
+        }
+    }
+    return success;
+}
+
+//This function handles calculating and managing the input validation for
+//the four input fields of the distance between two points
+const handleDistance = () => {
+    const resultElement = document.getElementById("lineResult");
+
+    const point1xValid = validateNumberInput("point1x", "point1xError");
+    const point1yValid = validateNumberInput("point1y", "point1yError");
+    const point2xValid = validateNumberInput("point2x", "point2xError");
+    const point2yValid = validateNumberInput("point2y", "point2yError");
+
+    if(!point1xValid || !point1yValid || !point2xValid || !point2yValid) {
+        resultElement.innerText = "";
+        return;
+    }
+
+    const point1xValue = getFloatValue("point1x");
+    const point1yValue = getFloatValue("point1y");
+    const point2xValue = getFloatValue("point2x");
+    const point2yValue = getFloatValue("point2y");
+
+    try {
+        const result = findDistanceBetweenPoints(point1xValue, point1yValue, point2xValue, point2yValue);
+        if(result === undefined || Number.isNaN(result)) {
+            resultElement.innerText = "Not real answer";
+        } else {
+            resultElement.innerText = "= "+String(result.toFixed(2));
+        }
+    } catch (e) {
+        resultElement.innerText = ` - ${e.message}`;
+    }
+}
+
+
 
 /**
  * handleQuadratic - handle input validation and display for quadratic equation
@@ -156,4 +249,15 @@ window.onload = () => {
     quadBElement.onkeyup = handleQuadratic;
     quadCElement.onkeyup = handleQuadratic;
     handleQuadratic();
+
+    const point1x = document.getElementById("point1x");
+    const point1y = document.getElementById("point1y");
+    const point2x = document.getElementById("point2x");
+    const point2y = document.getElementById("point2y");
+
+    point1x.onkeyup = handleDistance;
+    point1y.onkeyup = handleDistance;
+    point2x.onkeyup = handleDistance;
+    point2y.onkeyup = handleDistance;
+
 }

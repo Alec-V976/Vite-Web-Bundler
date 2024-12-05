@@ -1,0 +1,1 @@
+The math function I added is finding the distance between two points. There are four fields, representing the x and y of the two points. Typing numbers into those fields will calculate the distance between them.

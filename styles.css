@@ -11,3 +11,10 @@
 .op_equals {
     padding-top: 1.5em;
 }
+
+#thing {
+    display:flex;
+    justify-content: space-between;
+}
+
+

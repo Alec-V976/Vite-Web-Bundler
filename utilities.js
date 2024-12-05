@@ -1,20 +1,27 @@
 /*
  * Class: SWE2511 - Calculator
- *
+ * Name: Alec VerStrate
+ * Section: 111
  * Utility functions
  */
 
 // Helper functions for parameter validation
+
 /*
  * Checks if a value is defined
  */
-const isDefined = (value) => (
+export const isDefined = (value) => (
     value !== undefined && value !== null && typeof(value) !== 'undefined'
 );
 
 /*
  * Checks if a value is defined and is a number
  */
-const isNumber = (value) => (
+export const isNumber = (value) => (
     isDefined(value) && !isNaN(value) && !isNaN(parseFloat(value))
 );
+
+//checks if a number is greater than zero, returns boolean
+export const greaterThanZero = (v) => {
+    return isDefined(v) && isNumber(v) && v > 0
+}
