@@ -1,0 +1,145 @@
+<!--
+    Class: SWE2511 - Calculator
+    Name: Alec VerStrate
+    Section: 111
+	Calculator HTML structure
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+
+
+    <!-- Include additional styling -->
+
+
+    <!-- Include javascript for the application -->
+
+  <script type="module" crossorigin src="/assets/index-BSb452fX.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DGw5lD2t.css">
+</head>
+<body>
+    <h1 class="text-center mb-4">Calculator</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <h2>Arithmetic</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center op_row">
+            <div class="col-2">
+                <label for="input_a">Enter a number:</label><input id="input_a" type="text" class="form-control" value="0">
+                <div id="numA_error" class="invalid-feedback"></div>
+            </div>
+
+<!--            I've included GCD as a drop down in the operation select menu-->
+
+            <div class="col-1 op_equals">
+                <select id="operation_select" class="form-select">
+                    <option value="plus">+</option>
+                    <option value="minus">-</option>
+                    <option value="times">&times;</option>
+                    <option value="divide">&divide;</option>
+                    <option value="GCD">GCD</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="input_b">Enter a number:</label><input id="input_b" type="text" class="form-control" value="0">
+                <div id="numB_error" class="invalid-feedback"></div>
+            </div>
+            <div class="col-2 op_equals"><h3><span class="me-2">=</span><span id="result"></span></h3></div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-9">
+                <h2>Quadratic Formula<span id="quad_result"></span></h2>
+            </div>
+        </div>
+        <div class="row justify-content-center op_row">
+            <div class="col-2">
+                <label for="quad_a">Enter a number:</label><input id="quad_a" type="text" class="form-control" placeholder="A">
+                <div id="quadA_error" class="invalid-feedback"></div>
+            </div>
+            <div class="col-1 op_equals"><h3>x<sup>2</sup> +</h3></div>
+            <div class="col-2">
+                <label for="quad_b">Enter a number:</label><input id="quad_b" type="text" class="form-control" placeholder="B">
+                <div id="quadB_error" class="invalid-feedback"></div>
+            </div>
+            <div class="col-1 op_equals"><h3>x +</h3></div>
+            <div class="col-2">
+                <label for="quad_c">Enter a number:</label><input id="quad_c" type="text" class="form-control" placeholder="C">
+                <div id="quadC_error" class="invalid-feedback"></div>
+            </div>
+            <div class="col-1 op_equals"><h3>= 0</h3></div>
+        </div>
+
+
+<!--        This contains my math function I have chosen, the distance between two points-->
+<!--        It has four input fields, and is very similar to the quadratic calculator-->
+
+        <div class="row justify-content-center">
+            <div class="col-9">
+                <h2>Distance between two points on a 2D plane</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center op_row col-12">
+
+            <div class="col-1 op_equals"><h3>(</h3></div>
+
+            <div class="col-3">
+                <label for="point1x">Enter number (x) for point 1:</label><input id="point1x" type="text" class="form-control" placeholder="X">
+                <div id="point1xError" class="invalid-feedback"></div>
+            </div>
+
+            <div class="col-1 op_equals"><h3>,</h3></div>
+
+
+            <div class="col-3">
+                <label for="point1y">Enter number (y) for point 1:</label><input id="point1y" type="text" class="form-control" placeholder="Y">
+                <div id="point1yError" class="invalid-feedback"></div>
+            </div>
+
+            <div class="col-1 op_equals"><h3>)</h3></div>
+
+            <div><br/></div>
+
+            <div class="col-1 op_equals"><h3>(</h3></div>
+
+            <div class="col-3">
+                <label for="point2x">Enter number (x) for point 2:</label><input id="point2x" type="text" class="form-control" placeholder="X">
+                <div id="point2xError" class="invalid-feedback"></div>
+            </div>
+
+            <div class="col-1 op_equals"><h3>,</h3></div>
+
+
+            <div class="col-3">
+                <label for="point2y">Enter number (y) for point 2:</label><input id="point2y" type="text" class="form-control" placeholder="Y">
+                <div id="point2yError" class="invalid-feedback"></div>
+            </div>
+
+            <div class="col-1 op_equals"><h3>)</h3></div>
+
+
+
+
+
+            <div class="col-1 op_equals"><h3 id="lineResult">= 0</h3></div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
